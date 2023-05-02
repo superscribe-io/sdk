@@ -1,6 +1,6 @@
 {
 	"name": "@superscribe/sdk",
-	"version": "10.3.5",
+	"version": "10.3.6",
 	"description": "The official Superscribe SDK for use in JavaScript!",
 	"repository": "superscribe/sdk",
 	"main": "dist/sdk.cjs.js",
