@@ -21,7 +21,7 @@ class ItemsHandler {
     constructor(collection, transport) {
         this.collection = collection;
         this.transport = transport;
-        this.endpoint = collection.startsWith('superscribe_') ? `/${collection.substring(9)}` : `/items/${collection}`;
+        this.endpoint = collection.startsWith('superscribe_') ? `/${collection.replace('superscribe_', '')}` : `/items/${collection}`;
     }
     async readOne(id, query, options) {
         if (`${id}` === '')
@@ -386,7 +386,7 @@ class SingletonHandler {
     constructor(collection, transport) {
         this.collection = collection;
         this.transport = transport;
-        this.endpoint = collection.startsWith('superscribe_') ? `/${collection.substring(9)}` : `/items/${collection}`;
+        this.endpoint = collection.startsWith('superscribe_') ? `/${collection.replace('superscribe_', '')}` : `/items/${collection}`;
     }
     async read(query) {
         const item = await this.transport.get(`${this.endpoint}`, {
