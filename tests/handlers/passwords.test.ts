@@ -2,7 +2,7 @@
  * @jest-environment node
  */
 
-import { Directus } from '../../src';
+import { Superscribe } from '../../src';
 import { test } from '../utils';
 
 describe('password', function () {
@@ -14,7 +14,7 @@ describe('password', function () {
 			})
 			.reply(200, {});
 
-		const sdk = new Directus(url);
+		const sdk = new Superscribe(url);
 		await sdk.auth.password.request('admin@example.com', 'http://some_url.com');
 
 		expect(scope.pendingMocks().length).toBe(0);
@@ -28,7 +28,7 @@ describe('password', function () {
 			})
 			.reply(200, {});
 
-		const sdk = new Directus(url);
+		const sdk = new Superscribe(url);
 		await sdk.auth.password.reset('token', 'newpassword');
 
 		expect(scope.pendingMocks().length).toBe(0);

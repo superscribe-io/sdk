@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import { Directus } from '../../src';
+import { Superscribe } from '../../src';
 import { test } from '../utils';
 
 describe('auth (browser)', function () {
@@ -15,7 +15,7 @@ describe('auth (browser)', function () {
 	});
 
 	test(`sets default auth mode to cookie`, async (url) => {
-		const sdk = new Directus(url, { auth: { mode: 'cookie' } });
+		const sdk = new Superscribe(url, { auth: { mode: 'cookie' } });
 		expect(sdk.auth.mode).toBe('cookie');
 	});
 
@@ -30,7 +30,7 @@ describe('auth (browser)', function () {
 				},
 			});
 
-		const sdk = new Directus(url);
+		const sdk = new Superscribe(url);
 
 		await sdk.auth.login({
 			email: 'wolfulus@gmail.com',
@@ -52,15 +52,15 @@ describe('auth (browser)', function () {
 					},
 				},
 				{
-					'Set-Cookie': 'directus_refresh_token=my_refresh_token; Max-Age=604800; Path=/; HttpOnly;',
+					'Set-Cookie': 'superscribe_refresh_token=my_refresh_token; Max-Age=604800; Path=/; HttpOnly;',
 				}
 			);
 
-		nock().post('/auth/logout', {}).matchHeader('cookie', 'directus_refresh_token=my_refresh_token').reply(200, {
+		nock().post('/auth/logout', {}).matchHeader('cookie', 'superscribe_refresh_token=my_refresh_token').reply(200, {
 			data: {},
 		});
 
-		const sdk = new Directus(url);
+		const sdk = new Superscribe(url);
 
 		await sdk.auth.login({
 			email: 'wolfulus@gmail.com',

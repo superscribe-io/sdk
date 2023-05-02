@@ -11,7 +11,7 @@ export type FileItem<T = DefaultType> = FileType & T;
 
 export class FilesHandler<T = DefaultType> extends ItemsHandler<FileItem<T>> {
 	constructor(transport: ITransport) {
-		super('directus_files', transport);
+		super('superscribe_files', transport);
 	}
 
 	async import(body: { url: string; data?: ItemInput<T> }): Promise<OneItem<NonNullable<T>>> {

@@ -10,6 +10,6 @@ export type RoleItem<T = DefaultType> = RoleType & T;
 
 export class RolesHandler<T = DefaultType> extends ItemsHandler<RoleItem<T>> {
 	constructor(transport: ITransport) {
-		super('directus_roles', transport);
+		super('superscribe_roles', transport);
 	}
 }

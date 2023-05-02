@@ -10,6 +10,6 @@ export type PermissionItem<T = DefaultType> = PermissionType & T;
 
 export class PermissionsHandler<T = DefaultType> extends ItemsHandler<PermissionItem<T>> {
 	constructor(transport: ITransport) {
-		super('directus_permissions', transport);
+		super('superscribe_permissions', transport);
 	}
 }

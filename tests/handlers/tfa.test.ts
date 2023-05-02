@@ -2,7 +2,7 @@
  * @jest-environment node
  */
 
-import { Directus } from '../../src';
+import { Superscribe } from '../../src';
 import { test } from '../utils';
 
 describe('tfa', function () {
@@ -18,7 +18,7 @@ describe('tfa', function () {
 				},
 			});
 
-		const sdk = new Directus(url);
+		const sdk = new Superscribe(url);
 		const data = await sdk.users.me.tfa.generate('password1234');
 
 		expect(scope.pendingMocks().length).toBe(0);
@@ -35,7 +35,7 @@ describe('tfa', function () {
 			})
 			.reply(200, {});
 
-		const sdk = new Directus(url);
+		const sdk = new Superscribe(url);
 		await sdk.users.me.tfa.enable('supersecret', '123456');
 
 		expect(scope.pendingMocks().length).toBe(0);
@@ -48,7 +48,7 @@ describe('tfa', function () {
 			})
 			.reply(200, {});
 
-		const sdk = new Directus(url);
+		const sdk = new Superscribe(url);
 		await sdk.users.me.tfa.disable('12345');
 
 		expect(scope.pendingMocks().length).toBe(0);

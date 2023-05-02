@@ -2,7 +2,7 @@
  * @jest-environment node
  */
 
-import { Directus } from '../src';
+import { Superscribe } from '../src';
 import { test } from './utils';
 
 type Settings = {
@@ -31,7 +31,7 @@ describe('singleton', function () {
 				},
 			});
 
-		const sdk = new Directus<MyWebsite>(url);
+		const sdk = new Superscribe<MyWebsite>(url);
 		const settings = await sdk.singleton('settings').read();
 
 		expect(settings).not.toBeNull();
@@ -56,7 +56,7 @@ describe('singleton', function () {
 				},
 			});
 
-		const sdk = new Directus<MyWebsite>(url);
+		const sdk = new Superscribe<MyWebsite>(url);
 		const settings = await sdk.singleton('settings').update({
 			title: 'New Website Title',
 		});

@@ -5,7 +5,7 @@
 import { Auth } from '../../src/base/auth';
 import { ItemsHandler } from '../../src/base/items';
 import { Transport } from '../../src/base/transport';
-import { Directus } from '../../src/base';
+import { Superscribe } from '../../src/base';
 import {
 	ActivityHandler,
 	CollectionsHandler,
@@ -29,7 +29,7 @@ import { TFAHandler } from '../../src/handlers/tfa';
 import { MeHandler } from '../../src/handlers/me';
 
 describe('sdk', function () {
-	const sdk = new Directus('http://example.com');
+	const sdk = new Superscribe('http://example.com');
 
 	it('has auth', function () {
 		expect(sdk.auth).toBeInstanceOf(Auth);
@@ -136,7 +136,7 @@ describe('sdk', function () {
 			}
 		`;
 
-		const sdk = new Directus(url);
+		const sdk = new Superscribe(url);
 
 		const response = await sdk.graphql.items(query);
 
@@ -166,7 +166,7 @@ describe('sdk', function () {
 			}
 		`;
 
-		const sdk = new Directus(url);
+		const sdk = new Superscribe(url);
 
 		const response = await sdk.graphql.system(query);
 

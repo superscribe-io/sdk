@@ -15,7 +15,7 @@ export class UsersHandler<T = DefaultType> extends ItemsHandler<UserItem<T>> {
 	private _me?: MeHandler<UserItem<T>>;
 
 	constructor(transport: ITransport) {
-		super('directus_users', transport);
+		super('superscribe_users', transport);
 	}
 
 	get invites(): InvitesHandler {

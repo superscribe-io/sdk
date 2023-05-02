@@ -2,7 +2,7 @@
  * @jest-environment node
  */
 
-import { Auth, Directus, MemoryStorage, Transport } from '../../src';
+import { Auth, Superscribe, MemoryStorage, Transport } from '../../src';
 import { test } from '../utils';
 
 describe('auth', function () {
@@ -14,7 +14,7 @@ describe('auth', function () {
 			})
 			.reply(203);
 
-		const sdk = new Directus(url);
+		const sdk = new Superscribe(url);
 		await sdk.auth.static('token');
 	});
 
@@ -52,7 +52,7 @@ describe('auth', function () {
 
 		auth = new CustomAuthHandler({ storage, transport });
 
-		const sdk = new Directus(url, {
+		const sdk = new Superscribe(url, {
 			auth,
 			storage: auth.storage,
 			transport: auth.transport,
@@ -81,7 +81,7 @@ describe('auth', function () {
 				},
 			});
 
-		const sdk = new Directus(url);
+		const sdk = new Superscribe(url);
 		try {
 			await sdk.auth.login(
 				{
@@ -110,7 +110,7 @@ describe('auth', function () {
 			})
 			.reply(203);
 
-		const sdk = new Directus(url);
+		const sdk = new Superscribe(url);
 		await sdk.auth.static('token');
 
 		expect(await sdk.auth.token);
@@ -130,7 +130,7 @@ describe('auth', function () {
 				],
 			});
 
-		const sdk = new Directus(url);
+		const sdk = new Superscribe(url);
 		try {
 			await sdk.auth.login({
 				email: 'invalid@email.com',
@@ -161,7 +161,7 @@ describe('auth', function () {
 				],
 			});
 
-		const sdk = new Directus(url);
+		const sdk = new Superscribe(url);
 		try {
 			await sdk.auth.static('token');
 			fail('Should have thrown due to error response');

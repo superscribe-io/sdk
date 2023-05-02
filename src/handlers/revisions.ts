@@ -10,6 +10,6 @@ export type RevisionItem<T = DefaultType> = RevisionType & T;
 
 export class RevisionsHandler<T = DefaultType> extends ItemsHandler<RevisionItem<T>> {
 	constructor(transport: ITransport) {
-		super('directus_revisions', transport);
+		super('superscribe_revisions', transport);
 	}
 }

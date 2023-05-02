@@ -10,6 +10,6 @@ export type PresetItem<T = DefaultType> = PresetType & T;
 
 export class PresetsHandler<T = DefaultType> extends ItemsHandler<PresetItem<T>> {
 	constructor(transport: ITransport) {
-		super('directus_presets', transport);
+		super('superscribe_presets', transport);
 	}
 }

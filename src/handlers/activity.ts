@@ -13,7 +13,7 @@ export class ActivityHandler<T = DefaultType> extends ItemsHandler<ActivityItem<
 	private _comments: CommentsHandler<T>;
 
 	constructor(transport: ITransport) {
-		super('directus_activity', transport);
+		super('superscribe_activity', transport);
 		this._comments = new CommentsHandler(this.transport);
 	}
 

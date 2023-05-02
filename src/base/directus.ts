@@ -1,5 +1,5 @@
 import { IAuth, AuthOptions } from '../auth';
-import { IDirectus } from '../directus';
+import { ISuperscribe } from '../superscribe';
 import {
 	ActivityHandler,
 	AssetsHandler,
@@ -29,36 +29,36 @@ import { GraphQLHandler } from '../handlers/graphql';
 import { ISingleton } from '../singleton';
 import { SingletonHandler } from '../handlers/singleton';
 
-export type DirectusStorageOptions = StorageOptions & { mode?: 'LocalStorage' | 'MemoryStorage' };
+export type SuperscribeStorageOptions = StorageOptions & { mode?: 'LocalStorage' | 'MemoryStorage' };
 
-export type DirectusOptions<IAuthHandler extends IAuth = Auth> = {
+export type SuperscribeOptions<IAuthHandler extends IAuth = Auth> = {
 	auth?: IAuthHandler | PartialBy<AuthOptions, 'transport' | 'storage'>;
 	transport?: ITransport | Partial<TransportOptions>;
-	storage?: IStorage | DirectusStorageOptions;
+	storage?: IStorage | SuperscribeStorageOptions;
 };
 
-export class Directus<T extends TypeMap, IAuthHandler extends IAuth = Auth> implements IDirectus<T> {
+export class Superscribe<T extends TypeMap, IAuthHandler extends IAuth = Auth> implements ISuperscribe<T> {
 	private _url: string;
-	private _options?: DirectusOptions<IAuthHandler>;
+	private _options?: SuperscribeOptions<IAuthHandler>;
 	private _auth: IAuthHandler;
 	private _transport: ITransport;
 	private _storage: IStorage;
 	private _assets?: AssetsHandler;
-	private _activity?: ActivityHandler<TypeOf<T, 'directus_activity'>>;
-	private _collections?: CollectionsHandler<TypeOf<T, 'directus_collections'>>;
-	private _fields?: FieldsHandler<TypeOf<T, 'directus_fields'>>;
-	private _files?: FilesHandler<TypeOf<T, 'directus_files'>>;
-	private _folders?: FoldersHandler<TypeOf<T, 'directus_folders'>>;
-	private _permissions?: PermissionsHandler<TypeOf<T, 'directus_permissions'>>;
-	private _presets?: PresetsHandler<TypeOf<T, 'directus_presets'>>;
-	private _relations?: RelationsHandler<TypeOf<T, 'directus_relations'>>;
-	private _revisions?: RevisionsHandler<TypeOf<T, 'directus_revisions'>>;
-	private _roles?: RolesHandler<TypeOf<T, 'directus_roles'>>;
-	private _users?: UsersHandler<TypeOf<T, 'directus_users'>>;
+	private _activity?: ActivityHandler<TypeOf<T, 'superscribe_activity'>>;
+	private _collections?: CollectionsHandler<TypeOf<T, 'superscribe_collections'>>;
+	private _fields?: FieldsHandler<TypeOf<T, 'superscribe_fields'>>;
+	private _files?: FilesHandler<TypeOf<T, 'superscribe_files'>>;
+	private _folders?: FoldersHandler<TypeOf<T, 'superscribe_folders'>>;
+	private _permissions?: PermissionsHandler<TypeOf<T, 'superscribe_permissions'>>;
+	private _presets?: PresetsHandler<TypeOf<T, 'superscribe_presets'>>;
+	private _relations?: RelationsHandler<TypeOf<T, 'superscribe_relations'>>;
+	private _revisions?: RevisionsHandler<TypeOf<T, 'superscribe_revisions'>>;
+	private _roles?: RolesHandler<TypeOf<T, 'superscribe_roles'>>;
+	private _users?: UsersHandler<TypeOf<T, 'superscribe_users'>>;
 	private _server?: ServerHandler;
 	private _utils?: UtilsHandler;
 	private _graphql?: GraphQLHandler;
-	private _settings?: SettingsHandler<TypeOf<T, 'directus_settings'>>;
+	private _settings?: SettingsHandler<TypeOf<T, 'superscribe_settings'>>;
 
 	private _items: {
 		[collection: string]: ItemsHandler<any>;
@@ -68,7 +68,7 @@ export class Directus<T extends TypeMap, IAuthHandler extends IAuth = Auth> impl
 		[collection: string]: SingletonHandler<any>;
 	};
 
-	constructor(url: string, options?: DirectusOptions<IAuthHandler>) {
+	constructor(url: string, options?: SuperscribeOptions<IAuthHandler>) {
 		this._url = url;
 		this._options = options;
 		this._items = {};
@@ -76,8 +76,8 @@ export class Directus<T extends TypeMap, IAuthHandler extends IAuth = Auth> impl
 
 		if (this._options?.storage && this._options?.storage instanceof IStorage) this._storage = this._options.storage;
 		else {
-			const directusStorageOptions = this._options?.storage as DirectusStorageOptions | undefined;
-			const { mode, ...storageOptions } = directusStorageOptions ?? {};
+			const superscribeStorageOptions = this._options?.storage as SuperscribeStorageOptions | undefined;
+			const { mode, ...storageOptions } = superscribeStorageOptions ?? {};
 
 			if (mode === 'MemoryStorage' || typeof window === 'undefined') {
 				this._storage = new MemoryStorage(storageOptions);
@@ -149,57 +149,61 @@ export class Directus<T extends TypeMap, IAuthHandler extends IAuth = Auth> impl
 		return this._assets || (this._assets = new AssetsHandler(this.transport));
 	}
 
-	get activity(): ActivityHandler<TypeOf<T, 'directus_activity'>> {
-		return this._activity || (this._activity = new ActivityHandler<TypeOf<T, 'directus_activity'>>(this.transport));
+	get activity(): ActivityHandler<TypeOf<T, 'superscribe_activity'>> {
+		return this._activity || (this._activity = new ActivityHandler<TypeOf<T, 'superscribe_activity'>>(this.transport));
 	}
 
-	get collections(): CollectionsHandler<TypeOf<T, 'directus_collections'>> {
+	get collections(): CollectionsHandler<TypeOf<T, 'superscribe_collections'>> {
 		return (
 			this._collections ||
-			(this._collections = new CollectionsHandler<TypeOf<T, 'directus_collections'>>(this.transport))
+			(this._collections = new CollectionsHandler<TypeOf<T, 'superscribe_collections'>>(this.transport))
 		);
 	}
 
-	get fields(): FieldsHandler<TypeOf<T, 'directus_fields'>> {
-		return this._fields || (this._fields = new FieldsHandler<TypeOf<T, 'directus_fields'>>(this.transport));
+	get fields(): FieldsHandler<TypeOf<T, 'superscribe_fields'>> {
+		return this._fields || (this._fields = new FieldsHandler<TypeOf<T, 'superscribe_fields'>>(this.transport));
 	}
 
-	get files(): FilesHandler<TypeOf<T, 'directus_files'>> {
-		return this._files || (this._files = new FilesHandler<TypeOf<T, 'directus_files'>>(this.transport));
+	get files(): FilesHandler<TypeOf<T, 'superscribe_files'>> {
+		return this._files || (this._files = new FilesHandler<TypeOf<T, 'superscribe_files'>>(this.transport));
 	}
 
-	get folders(): FoldersHandler<TypeOf<T, 'directus_folders'>> {
-		return this._folders || (this._folders = new FoldersHandler<TypeOf<T, 'directus_folders'>>(this.transport));
+	get folders(): FoldersHandler<TypeOf<T, 'superscribe_folders'>> {
+		return this._folders || (this._folders = new FoldersHandler<TypeOf<T, 'superscribe_folders'>>(this.transport));
 	}
 
-	get permissions(): PermissionsHandler<TypeOf<T, 'directus_permissions'>> {
+	get permissions(): PermissionsHandler<TypeOf<T, 'superscribe_permissions'>> {
 		return (
 			this._permissions ||
-			(this._permissions = new PermissionsHandler<TypeOf<T, 'directus_permissions'>>(this.transport))
+			(this._permissions = new PermissionsHandler<TypeOf<T, 'superscribe_permissions'>>(this.transport))
 		);
 	}
 
-	get presets(): PresetsHandler<TypeOf<T, 'directus_presets'>> {
-		return this._presets || (this._presets = new PresetsHandler<TypeOf<T, 'directus_presets'>>(this.transport));
+	get presets(): PresetsHandler<TypeOf<T, 'superscribe_presets'>> {
+		return this._presets || (this._presets = new PresetsHandler<TypeOf<T, 'superscribe_presets'>>(this.transport));
 	}
 
-	get relations(): RelationsHandler<TypeOf<T, 'directus_relations'>> {
-		return this._relations || (this._relations = new RelationsHandler<TypeOf<T, 'directus_relations'>>(this.transport));
+	get relations(): RelationsHandler<TypeOf<T, 'superscribe_relations'>> {
+		return (
+			this._relations || (this._relations = new RelationsHandler<TypeOf<T, 'superscribe_relations'>>(this.transport))
+		);
 	}
 
-	get revisions(): RevisionsHandler<TypeOf<T, 'directus_revisions'>> {
-		return this._revisions || (this._revisions = new RevisionsHandler<TypeOf<T, 'directus_revisions'>>(this.transport));
+	get revisions(): RevisionsHandler<TypeOf<T, 'superscribe_revisions'>> {
+		return (
+			this._revisions || (this._revisions = new RevisionsHandler<TypeOf<T, 'superscribe_revisions'>>(this.transport))
+		);
 	}
 
-	get roles(): RolesHandler<TypeOf<T, 'directus_roles'>> {
-		return this._roles || (this._roles = new RolesHandler<TypeOf<T, 'directus_roles'>>(this.transport));
+	get roles(): RolesHandler<TypeOf<T, 'superscribe_roles'>> {
+		return this._roles || (this._roles = new RolesHandler<TypeOf<T, 'superscribe_roles'>>(this.transport));
 	}
 
-	get users(): UsersHandler<TypeOf<T, 'directus_users'>> {
-		return this._users || (this._users = new UsersHandler<TypeOf<T, 'directus_users'>>(this.transport));
+	get users(): UsersHandler<TypeOf<T, 'superscribe_users'>> {
+		return this._users || (this._users = new UsersHandler<TypeOf<T, 'superscribe_users'>>(this.transport));
 	}
-	get settings(): SettingsHandler<TypeOf<T, 'directus_settings'>> {
-		return this._settings || (this._settings = new SettingsHandler<TypeOf<T, 'directus_settings'>>(this.transport));
+	get settings(): SettingsHandler<TypeOf<T, 'superscribe_settings'>> {
+		return this._settings || (this._settings = new SettingsHandler<TypeOf<T, 'superscribe_settings'>>(this.transport));
 	}
 	get server(): ServerHandler {
 		return this._server || (this._server = new ServerHandler(this.transport));

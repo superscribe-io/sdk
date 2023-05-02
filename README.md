@@ -1,28 +1,28 @@
-# Directus JS SDK
+# Superscribe JS SDK
 
 ## Installation
 
 ```
-npm install @directus/sdk
+npm install @superscribe/sdk
 ```
 
 ## Basic Usage
 
 ```js
-import { Directus } from '@directus/sdk';
+import { Superscribe } from '@superscribe/sdk';
 
-const directus = new Directus('http://directus.example.com');
+const superscribe = new Superscribe('http://superscribe.example.com');
 
-const items = await directus.items('articles').readOne(15);
+const items = await superscribe.items('articles').readOne(15);
 console.log(items);
 ```
 
 ```js
-import { Directus } from '@directus/sdk';
+import { Superscribe } from '@superscribe/sdk';
 
-const directus = new Directus('http://directus.example.com');
+const superscribe = new Superscribe('http://superscribe.example.com');
 
-directus
+superscribe
 	.items('articles')
 	.readOne(15)
 	.then((item) => {
@@ -32,7 +32,7 @@ directus
 
 ## Reference
 
-See [the docs](https://docs.directus.io/reference/sdk/) for a full usage reference and all supported methods.
+See [the docs](https://docs.superscribe.io/reference/sdk/) for a full usage reference and all supported methods.
 
 ## Contributing
 

@@ -1,8 +1,8 @@
 {
-	"name": "@directus/sdk",
+	"name": "@superscribe/sdk",
 	"version": "10.3.3",
-	"description": "The official Directus SDK for use in JavaScript!",
-	"repository": "directus/sdk",
+	"description": "The official Superscribe SDK for use in JavaScript!",
+	"repository": "superscribe/sdk",
 	"main": "dist/sdk.cjs.js",
 	"exports": {
 		".": {
@@ -38,7 +38,7 @@
 		"api",
 		"client",
 		"cms",
-		"directus",
+		"superscribe",
 		"headless",
 		"javascript",
 		"node",

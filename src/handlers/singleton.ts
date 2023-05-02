@@ -10,7 +10,7 @@ export class SingletonHandler<T> implements ISingleton<T> {
 	constructor(collection: string, transport: ITransport) {
 		this.collection = collection;
 		this.transport = transport;
-		this.endpoint = collection.startsWith('directus_') ? `/${collection.substring(9)}` : `/items/${collection}`;
+		this.endpoint = collection.startsWith('superscribe_') ? `/${collection.substring(9)}` : `/items/${collection}`;
 	}
 
 	async read<Q extends QueryOne<T>>(query?: Q): Promise<OneItem<T, Q>> {

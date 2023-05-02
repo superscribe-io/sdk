@@ -14,7 +14,7 @@ export type ServerInfo = {
 		public_note: string;
 		custom_css: string;
 	};
-	directus?: {
+	superscribe?: {
 		version: string;
 	};
 };

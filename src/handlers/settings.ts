@@ -9,6 +9,6 @@ export type SettingItem<T = DefaultType> = SettingType & T;
 
 export class SettingsHandler<T = SettingItem> extends SingletonHandler<T> {
 	constructor(transport: ITransport) {
-		super('directus_settings', transport);
+		super('superscribe_settings', transport);
 	}
 }

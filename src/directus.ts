@@ -24,7 +24,7 @@ import { TypeMap, TypeOf } from './types';
 import { GraphQLHandler } from './handlers/graphql';
 import { ISingleton } from './singleton';
 
-export type DirectusTypes = {
+export type SuperscribeTypes = {
 	activity: undefined;
 	assets: undefined;
 	collections: undefined;
@@ -40,7 +40,7 @@ export type DirectusTypes = {
 	users: undefined;
 };
 
-export interface IDirectusBase {
+export interface ISuperscribeBase {
 	readonly url: string;
 	readonly auth: IAuth;
 	readonly storage: IStorage;
@@ -50,20 +50,20 @@ export interface IDirectusBase {
 	readonly graphql: GraphQLHandler;
 }
 
-export interface IDirectus<T extends TypeMap> extends IDirectusBase {
-	readonly activity: ActivityHandler<TypeOf<T, 'directus_activity'>>;
+export interface ISuperscribe<T extends TypeMap> extends ISuperscribeBase {
+	readonly activity: ActivityHandler<TypeOf<T, 'superscribe_activity'>>;
 	readonly assets: AssetsHandler;
-	readonly collections: CollectionsHandler<TypeOf<T, 'directus_collections'>>;
-	readonly files: FilesHandler<TypeOf<T, 'directus_files'>>;
-	readonly fields: FieldsHandler<TypeOf<T, 'directus_fields'>>;
-	readonly folders: FoldersHandler<TypeOf<T, 'directus_folders'>>;
-	readonly permissions: PermissionsHandler<TypeOf<T, 'directus_permissions'>>;
-	readonly presets: PresetsHandler<TypeOf<T, 'directus_presets'>>;
-	readonly revisions: RevisionsHandler<TypeOf<T, 'directus_revisions'>>;
-	readonly relations: RelationsHandler<TypeOf<T, 'directus_relations'>>;
-	readonly roles: RolesHandler<TypeOf<T, 'directus_roles'>>;
-	readonly users: UsersHandler<TypeOf<T, 'directus_users'>>;
-	readonly settings: SettingsHandler<TypeOf<T, 'directus_settings'>>;
+	readonly collections: CollectionsHandler<TypeOf<T, 'superscribe_collections'>>;
+	readonly files: FilesHandler<TypeOf<T, 'superscribe_files'>>;
+	readonly fields: FieldsHandler<TypeOf<T, 'superscribe_fields'>>;
+	readonly folders: FoldersHandler<TypeOf<T, 'superscribe_folders'>>;
+	readonly permissions: PermissionsHandler<TypeOf<T, 'superscribe_permissions'>>;
+	readonly presets: PresetsHandler<TypeOf<T, 'superscribe_presets'>>;
+	readonly revisions: RevisionsHandler<TypeOf<T, 'superscribe_revisions'>>;
+	readonly relations: RelationsHandler<TypeOf<T, 'superscribe_relations'>>;
+	readonly roles: RolesHandler<TypeOf<T, 'superscribe_roles'>>;
+	readonly users: UsersHandler<TypeOf<T, 'superscribe_users'>>;
+	readonly settings: SettingsHandler<TypeOf<T, 'superscribe_settings'>>;
 
 	items<C extends string, I = TypeOf<T, C>>(collection: C): IItems<I>;
 	singleton<C extends string, I = TypeOf<T, C>>(collection: C): ISingleton<I>;

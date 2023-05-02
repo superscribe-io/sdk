@@ -2,12 +2,12 @@
  * @jest-environment node
  */
 
-import { Directus } from '../../src';
+import { Superscribe } from '../../src';
 import { test } from '../utils';
 
 describe('auth (node)', function () {
 	test(`sets default auth mode to json`, async (url) => {
-		const sdk = new Directus(url);
+		const sdk = new Superscribe(url);
 		expect(sdk.auth.mode).toBe('json');
 	});
 
@@ -22,7 +22,7 @@ describe('auth (node)', function () {
 				},
 			});
 
-		const sdk = new Directus(url);
+		const sdk = new Superscribe(url);
 		const loginPromise = sdk.auth.login({
 			email: 'wolfulus@gmail.com',
 			password: 'password',
@@ -46,7 +46,7 @@ describe('auth (node)', function () {
 					},
 				},
 				{
-					'Set-Cookie': 'directus_refresh_token=my_refresh_token; Max-Age=604800; Path=/; HttpOnly;',
+					'Set-Cookie': 'superscribe_refresh_token=my_refresh_token; Max-Age=604800; Path=/; HttpOnly;',
 				}
 			);
 
@@ -58,7 +58,7 @@ describe('auth (node)', function () {
 				data: {},
 			});
 
-		const sdk = new Directus(url);
+		const sdk = new Superscribe(url);
 
 		const loginPromise = sdk.auth.login({
 			email: 'wolfulus@gmail.com',

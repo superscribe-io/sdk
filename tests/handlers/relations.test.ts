@@ -2,7 +2,7 @@
  * @jest-environment node
  */
 
-import { Directus } from '../../src';
+import { Superscribe } from '../../src';
 import { test } from '../utils';
 
 describe('relations', function () {
@@ -11,7 +11,7 @@ describe('relations', function () {
 			.patch('/relations/posts/title', { meta: { required: true } })
 			.reply(200, {});
 
-		const sdk = new Directus(url);
+		const sdk = new Superscribe(url);
 		await sdk.relations.updateOne('posts', 'title', {
 			meta: {
 				required: true,

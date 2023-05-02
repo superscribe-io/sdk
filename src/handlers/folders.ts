@@ -10,6 +10,6 @@ export type FolderItem<T = DefaultType> = FolderType & T;
 
 export class FoldersHandler<T = DefaultType> extends ItemsHandler<FolderItem<T>> {
 	constructor(transport: ITransport) {
-		super('directus_folders', transport);
+		super('superscribe_folders', transport);
 	}
 }

@@ -2,7 +2,7 @@
  * @jest-environment node
  */
 
-import { Directus } from '../../src';
+import { Superscribe } from '../../src';
 import { test } from '../utils';
 
 describe('comments', function () {
@@ -22,7 +22,7 @@ describe('comments', function () {
 				},
 			});
 
-		const sdk = new Directus(url);
+		const sdk = new Superscribe(url);
 		const item = await sdk.activity.comments.create({
 			collection: 'posts',
 			item: '1',
@@ -47,7 +47,7 @@ describe('comments', function () {
 				},
 			});
 
-		const sdk = new Directus(url);
+		const sdk = new Superscribe(url);
 		const item = await sdk.activity.comments.update(5, 'Awesome content!');
 
 		expect(item.comment).toBe('Awesome content!');
@@ -56,7 +56,7 @@ describe('comments', function () {
 	test(`deletes comments`, async (url, nock) => {
 		const scope = nock().delete('/activity/comment/5').reply(204);
 
-		const sdk = new Directus(url);
+		const sdk = new Superscribe(url);
 		await sdk.activity.comments.delete(5);
 
 		expect(scope.pendingMocks().length).toBe(0);
