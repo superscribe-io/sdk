@@ -20,7 +20,7 @@ export class ItemsHandler<T extends Item> implements IItems<T> {
 	constructor(collection: string, transport: ITransport) {
 		this.collection = collection;
 		this.transport = transport;
-		this.endpoint = collection.startsWith('superscribe_') ? `/${collection.substring(9)}` : `/items/${collection}`;
+		this.endpoint = collection.startsWith('superscribe_') ? `/${collection.replace('superscribe_','')}` : `/items/${collection}`;
 	}
 
 	async readOne<Q extends QueryOne<T>>(id: ID, query?: Q, options?: ItemsOptions): Promise<OneItem<T, Q>> {
